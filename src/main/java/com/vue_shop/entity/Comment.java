@@ -6,30 +6,31 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serializable;
 
 /**
- * (User)表实体类
+ * (Comment)表实体类
  *
  * @author makejava
- * @since 2020-01-07 16:59:39
+ * @since 2020-04-19 14:42:53
  */
 @SuppressWarnings("serial")
-public class User extends Model<User> {
+public class Comment extends Model<Comment> {
 
-    //主键自增需加这一条
     @TableId(type = IdType.AUTO)
     
-    private Integer uid;
+    private Integer commentid;
     
     private String uname;
     
-    private String password;
+    private String content;
+    
+    private Integer pid;
 
 
-    public Integer getUid() {
-        return uid;
+    public Integer getCommentid() {
+        return commentid;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setCommentid(Integer commentid) {
+        this.commentid = commentid;
     }
 
     public String getUname() {
@@ -40,12 +41,20 @@ public class User extends Model<User> {
         this.uname = uname;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContent() {
+        return content;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 
     /**
@@ -55,6 +64,6 @@ public class User extends Model<User> {
      */
     @Override
     protected Serializable pkVal() {
-        return this.uid;
+        return this.commentid;
     }
     }

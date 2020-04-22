@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.vue_shop.entity.Orders;
+import com.vue_shop.entity.Result;
 import com.vue_shop.service.OrdersService;
 import org.springframework.web.bind.annotation.*;
 
@@ -92,10 +93,24 @@ public class OrdersController extends ApiController {
      * @return Result
      */
     @GetMapping(value = "/cart")
-    public R login(Page<Orders> page,@RequestParam("uid") Integer uid) {
+    public R login(Page<Orders> page,@RequestParam("uid") Integer uid,@RequestParam("ordered") Integer ordered) {
         //使用mybatis-plus的Iservice中的方法getOne
         QueryWrapper<Orders> wrapper = new QueryWrapper<Orders>();
         wrapper.eq("uid", uid);
+        wrapper.eq("ordered", ordered);
         return success(this.ordersService.pageMaps(page,wrapper));
+    }
+    /**
+     * 查询orders是否存在
+     *
+     * @param orders 参数封装
+     * @return Result
+     */
+    @PostMapping(value = "/addcart")
+    public Orders register(@RequestBody Orders orders) {
+        //使用mybatis-plus的Iservice中的方法getOne
+        QueryWrapper<Orders> wrapper = new QueryWrapper<Orders>();
+        wrapper.eq("pid", orders.getPid());
+        return this.ordersService.getOne(wrapper);
     }
 }

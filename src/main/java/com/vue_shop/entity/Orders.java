@@ -26,6 +26,8 @@ public class Orders extends Model<Orders> {
     
     private Integer ordered;
 
+    private String odid;
+
 
     public Integer getOid() {
         return oid;
@@ -65,6 +67,14 @@ public class Orders extends Model<Orders> {
 
     public void setOrdered(Integer ordered) {
         this.ordered = ordered;
+    }
+
+    public String getOdid() {
+        return odid;
+    }
+
+    public void setOdid(String odid) {
+        this.odid = odid;
     }
 
     /**

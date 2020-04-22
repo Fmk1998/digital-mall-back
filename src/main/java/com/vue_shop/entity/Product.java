@@ -28,6 +28,8 @@ public class Product extends Model<Product> {
 
     private Integer cid;
 
+    private String pdetail;
+
     public Integer getPid() {
         return pid;
     }
@@ -74,6 +76,14 @@ public class Product extends Model<Product> {
 
     public void setCid(Integer cid) {
         this.cid = cid;
+    }
+
+    public String getPdetail() {
+        return pdetail;
+    }
+
+    public void setPdetail(String pdetail) {
+        this.pdetail = pdetail;
     }
 
     /**

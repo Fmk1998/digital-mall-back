@@ -70,12 +70,37 @@ public class UserController extends ApiController {
         result.setDetail(null);
         String userpwd = user.getPassword();
         String newuserpwd = newuser.getPassword();
-        if ( userpwd.equals(newuserpwd)){
+        if (userpwd.equals(newuserpwd)) {
             result.setMsg("登录成功");
             result.setSuccess(true);
             result.setDetail(newuser);
-        }else{
-            result.setMsg(newuser.getPassword()+"用户名或密码错误"+user.getPassword());
+        } else {
+            result.setMsg(newuser.getPassword() + "用户名或密码错误" + user.getPassword());
+        }
+        return result;
+    }
+
+    /**
+     * 登录
+     *
+     * @param user 参数封装
+     * @return Result
+     */
+    @PostMapping(value = "/register")
+    public Result register(@RequestBody User user) {
+        //使用mybatis-plus的Iservice中的方法getOne
+        QueryWrapper<User> wrapper = new QueryWrapper<User>();
+        wrapper.eq("uname", user.getUname());
+        User newuser = this.userService.getOne(wrapper);
+        Result result = new Result();
+        result.setSuccess(false);
+        result.setDetail(null);
+        if (newuser==null) {
+            result.setMsg("用户名不存在");
+            result.setSuccess(true);
+            result.setDetail(newuser);
+        } else {
+            result.setMsg("用户名已存在");
         }
         return result;
     }
